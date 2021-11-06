@@ -1,4 +1,4 @@
-#### Simple DETEKT implementation
+#### Simple Spotless implementation
 
 ##### others
 
@@ -15,6 +15,16 @@
 ##### Tutorials
 
 [medium](https://hofstede-matheus.medium.com/improve-code-quality-with-ktlint-detekt-and-git-hooks-d173722594e4)
+
+[Android project code style using Spotless and ktlint](https://medium.com/@int_32/android-project-code-style-using-spotless-and-ktlint-5422fd90976c)
+
+[Spotless on Android](https://medium.com/swlh/spotless-on-android-3716459cecd7)
+
+#
+
+##### CI
+
+[.travis.yml](https://github.com/RankoR/android-smart-rate/blob/master/.travis.yml)
 
 #
 
