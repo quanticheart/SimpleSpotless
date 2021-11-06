@@ -1,0 +1,11 @@
+# Checks that there is no wildcard imports. Exception: allowedWildcards
+- name: FILE_WILDCARD_IMPORTS
+  enabled: false
+  configuration:
+    allowedWildcards: "" # Allowed wildcards for imports (e.g. "import org.cqfn.diktat.*, import org.jetbrains.kotlin.*")
+    useRecommendedImportsOrder: true
+- name: MISSING_KDOC_TOP_LEVEL
+  enabled: false
+# Checks that accessible internal elements (protected, public, internal) in a class are documented
+- name: MISSING_KDOC_CLASS_ELEMENTS
+  enabled: false

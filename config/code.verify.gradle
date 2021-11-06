@@ -1,0 +1,69 @@
+apply plugin: "com.diffplug.spotless"
+
+def copyright = "My copyright"
+def license = "My licence"
+def licenseSimple = "My licenseSimple"
+
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy-MM-dd')
+    return formattedDate
+}
+
+def licence = String.format(
+        "/*%n" +
+                " * $copyright%n" +
+                " * $license%n" +
+                " * $licenseSimple%n" +
+                " *%n" +
+                " * (C)${getDate()} %n*/"
+)
+
+spotless {
+
+//    ratchetFrom 'origin/develop'
+
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '*.gradle', '*.md', '.gitignore'
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+        endWithNewline()
+    }
+
+    format 'xml', {
+        target '**/*.xml'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    java {
+        target '**/*.java'
+        googleJavaFormat().aosp()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    kotlin {
+        target '**/*.kt'
+        ktlint().userData(["disabled_rules": "no-wildcard-imports"])
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+        // by default the target is every '.kt' and '.kts` file in the java sourcesets
+        ktfmt()    // has its own section below
+//        diktat().configFile("$rootDir/config/diktat-analysis.yml")   // has its own section below
+//        prettier() // has its own section below
+        licenseHeader(licence)
+    }
+    kotlinGradle {
+        target '*.gradle.kts' // default target for kotlinGradle
+        ktlint() // or ktfmt() or prettier()
+//        licenseHeader(licence)
+    }
+}
